@@ -16,6 +16,10 @@ public abstract class Account implements Observable{
         observers = new ArrayList<Observer>();
     }
 
+    public void testing() {
+    	System.out.println("Hello");
+    }
+    
     // ==========================================================
     public void registerObserver(Observer o) {
         observers.add(o);
