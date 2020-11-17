@@ -1,4 +1,4 @@
-package edu.miu.cs.cs525.finalproject.ui.bank;
+package edu.miu.cs.cs525.finalproject.framework.ui.bank;
 import java.awt.*;
 import javax.swing.*;
 
