@@ -30,14 +30,14 @@ public abstract class AccountService {
         Account account = accountDAO.loadAccount(accountNumber);
         account.deposit(amount);
 
-        accountDAO.updateAccount(account.getCustomer().getCustomerId(), account);
+        accountDAO.updateAccount(account.getCustomer().getName(), account);
     }
 
     public void withdraw(String accountNumber, double amount) {
         Account account = accountDAO.loadAccount(accountNumber);
         account.withdraw(amount);
 
-        accountDAO.updateAccount(account.getCustomer().getCustomerId(), account);
+        accountDAO.updateAccount(account.getCustomer().getName(), account);
     }
 
     public void sendEmail(String accountNumber, String message) {

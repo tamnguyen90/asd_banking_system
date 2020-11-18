@@ -1,4 +1,12 @@
 package edu.miu.cs.cs525.finalproject.framework.ui.bank;
+import edu.miu.cs.cs525.finalproject.banking.domain.CompanyCheckingsAccount;
+import edu.miu.cs.cs525.finalproject.banking.domain.CompanySavingsAccount;
+import edu.miu.cs.cs525.finalproject.framework.domain.Account;
+import edu.miu.cs.cs525.finalproject.framework.domain.Address;
+import edu.miu.cs.cs525.finalproject.framework.domain.Company;
+import edu.miu.cs.cs525.finalproject.framework.domain.Customer;
+import edu.miu.cs.cs525.finalproject.framework.service.AccountService;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -142,11 +150,24 @@ public class JDialog_AddCompAcc extends JDialog
        parentframe.city=JTextField_CT.getText();
        parentframe.zip=JTextField_ZIP.getText();
        parentframe.state=JTextField_ST.getText();
-       if (JRadioButton_Chk.isSelected())
-           parentframe.accountType="Ch";
-           else
-           parentframe.accountType="S";
+       Address address = new Address(JTextField_STR.getText(), JTextField_CT.getText(), JTextField_ST.getText(), JTextField_ZIP.getText());
+       Customer customer = new Company(JTextField_NAME.getText(), address, JTextField_EM.getText(), Integer.parseInt(JTextField_NoOfEmp.getText()));
+       String type = "";
+		Account account = null;
+       if (JRadioButton_Chk.isSelected()) {
+		   parentframe.accountType="Ch";
+		   type = "Ch";
+		   account = new CompanyCheckingsAccount(JTextField_ACNR.getText(), type, customer);
+	   } else {
+		   parentframe.accountType="S";
+		   type = "S";
+		   account = new CompanySavingsAccount(JTextField_ACNR.getText(), type, customer);
+	   }
 	   parentframe.newaccount=true;
+       AccountService accountService = parentframe.getAccountService();
+	   accountService.createAccount(customer, account);
+	   Account account1 = accountService.getAccount(JTextField_ACNR.getText());
+		System.out.println(account1.getAccountNumber() + " - " + account1.getType());
 	   dispose();
 			 
 	}

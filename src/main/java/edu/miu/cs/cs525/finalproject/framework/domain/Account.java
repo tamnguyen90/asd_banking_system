@@ -12,10 +12,11 @@ public abstract class Account implements Observable{
     private List<AccountEntry> entryList;
     private ArrayList<Observer> observers;
 
-    public Account(String accountNumber, String type, Customer customer) {
+    public Account(String accountNumber, String type, Customer customer, InterestCalculation interest) {
         this.accountNumber = accountNumber;
         this.type = type;
         this.customer = customer;
+        this.interest = interest;
         this.observers = new ArrayList<Observer>();
         this.entryList = new ArrayList<AccountEntry>();
     }

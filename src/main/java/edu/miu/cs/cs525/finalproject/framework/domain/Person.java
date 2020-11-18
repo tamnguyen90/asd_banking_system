@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Person extends Customer {
     private LocalDate birthDate;
 
-    public Person(String id, String name, String emailAddress, Address address, LocalDate birthDate) {
-        super(id, name, emailAddress, address);
+    public Person(String name, String emailAddress, Address address, LocalDate birthDate) {
+        super(name, emailAddress, address);
         this.birthDate = birthDate;
     }
     public LocalDate getBirthDate() {

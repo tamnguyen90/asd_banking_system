@@ -1,13 +1,11 @@
 package edu.miu.cs.cs525.finalproject.framework.domain;
 
 public abstract class Customer {
-    private String customerId;
     private String name;
     private String emailAddress;
     private Address address;
 
-    public Customer(String customerId, String name, String emailAddress, Address address) {
-        this.customerId = customerId;
+    public Customer(String name, String emailAddress, Address address) {
         this.name = name;
         this.emailAddress = emailAddress;
         this.address = address;
@@ -19,10 +17,6 @@ public abstract class Customer {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCustomerId() {
-        return customerId;
     }
 
     public String getEmailAddress() {

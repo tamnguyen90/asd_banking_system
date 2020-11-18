@@ -7,8 +7,8 @@ import java.util.Collection;
 
 public interface AccountDAO {
     void saveAccount(Customer customer, Account account);
-    void updateAccount(String customerId, Account account);
+    void updateAccount(String customerName, Account account);
     Account loadAccount(String accountNumber);
-    Collection<Account> getAccountsByCustomer(String customerId);
+    Collection<Account> getAccountsByCustomer(String customerName);
     Collection<Account> getAccounts();
 }

@@ -1,5 +1,8 @@
 package edu.miu.cs.cs525.finalproject.framework.ui.bank;
 
+import edu.miu.cs.cs525.finalproject.banking.BankingSystemService;
+import edu.miu.cs.cs525.finalproject.framework.service.AccountService;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
@@ -21,9 +24,11 @@ public class BankFrm extends JFrame
     private JScrollPane JScrollPane1;
     BankFrm myframe;
     private Object rowdata[];
+    private AccountService accountService;
     
 	public BankFrm()
 	{
+		this.accountService = new BankingSystemService();
 		myframe = this;
 
 		setTitle("Bank Application.");
@@ -301,7 +306,11 @@ public class BankFrm extends JFrame
 	
 	void JButtonAddinterest_actionPerformed(ActionEvent event)
 	{
-		  JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-	    
+		  //JOptionPane.showMessageDialog(JButton_Addinterest, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
+			accountService.addInterests();
+	}
+
+	public AccountService getAccountService() {
+		return accountService;
 	}
 }

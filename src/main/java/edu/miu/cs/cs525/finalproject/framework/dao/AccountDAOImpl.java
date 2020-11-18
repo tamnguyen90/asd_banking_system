@@ -21,8 +21,8 @@ public class AccountDAOImpl implements AccountDAO {
         }
     }
 
-    public void updateAccount(String customerId, Account account) {
-        Customer customer = getCustomerById(customerId);
+    public void updateAccount(String customerName, Account account) {
+        Customer customer = getCustomerByName(customerName);
         Collection<Account> accounts = accountMap.get(customer);
         Account currentAccount = loadAccount(account.getAccountNumber());
         if (currentAccount != null) {
@@ -40,8 +40,8 @@ public class AccountDAOImpl implements AccountDAO {
                                     .orElse(null);
     }
 
-    public Collection<Account> getAccountsByCustomer(String customerId) {
-        Customer customer = getCustomerById(customerId);
+    public Collection<Account> getAccountsByCustomer(String customerName) {
+        Customer customer = getCustomerByName(customerName);
         return accountMap.get(customer);
     }
 
@@ -51,9 +51,9 @@ public class AccountDAOImpl implements AccountDAO {
                 .collect(Collectors.toList());
     }
 
-    public Customer getCustomerById(String customerId) {
+    public Customer getCustomerByName(String customerName) {
         return accountMap.keySet().stream()
-                .filter(cust -> customerId.equals(cust.getCustomerId()))
+                .filter(cust -> customerName.equals(cust.getName()))
                 .findFirst()
                 .orElse(null);
     }
