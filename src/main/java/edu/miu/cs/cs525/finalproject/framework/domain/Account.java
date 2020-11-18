@@ -8,16 +8,16 @@ public abstract class Account implements Observable{
     private Customer customer;
     private InterestCalculation interest;
     private String accountNumber;
-    private List<AccountEntry> entryList = new ArrayList<AccountEntry>();
+    private String type;
+    private List<AccountEntry> entryList;
     private ArrayList<Observer> observers;
 
-    public Account(String accountNumber) {
+    public Account(String accountNumber, String type, Customer customer) {
         this.accountNumber = accountNumber;
-        observers = new ArrayList<Observer>();
-    }
-
-    public void testing() {
-    	System.out.println("Hello");
+        this.type = type;
+        this.customer = customer;
+        this.observers = new ArrayList<Observer>();
+        this.entryList = new ArrayList<AccountEntry>();
     }
     
     // ==========================================================
@@ -32,18 +32,16 @@ public abstract class Account implements Observable{
         }
     }
 
-    public void notifyObservers(double change) {
+    public void notifyObservers(String message) {
         for (int i = 0; i < observers.size(); i++) {
             Observer observer = (Observer) observers.get(i);
-            observer.update(change);
+            observer.update(message);
         }
     }
 
-    public void accountChanged(double change) {
-        notifyObservers(change);
+    public void accountChanged(String message) {
+        notifyObservers(message);
     }
-
-// ================================================================
 
     public void setInterest(InterestCalculation intrst) {
         interest = intrst;
@@ -73,27 +71,20 @@ public abstract class Account implements Observable{
     public void deposit(double amount) {
         AccountEntry entry = new AccountEntry(amount, "deposit");
         entryList.add(entry);
-
+        String message = "Your account has just been deposited $" + amount + ". The current balance is $" + getBalance() + ".";
+        notifyObservers(message);
     }
 
     public void withdraw(double amount) {
-        AccountEntry entry = new AccountEntry(-amount, "withdraw");
+        String transactionType = "credit".equals(type) ? "charged" : "withdrawn";
+        AccountEntry entry = new AccountEntry(-amount, transactionType);
         entryList.add(entry);
-
+        String message = "Your account has just been " + transactionType + " $" + amount + ". The current balance is $" + getBalance() + ".";
+        notifyObservers(message);
     }
 
     private void addEntry(AccountEntry entry) {
         entryList.add(entry);
-    }
-
-    public void transferFunds(Account toAccount, double amount, String description) {
-        AccountEntry fromEntry = new AccountEntry(-amount, description);
-        AccountEntry toEntry = new AccountEntry(amount, description);
-
-        entryList.add(fromEntry);
-
-        toAccount.addEntry(toEntry);
-
     }
 
     public Customer getCustomer() {
@@ -106,6 +97,10 @@ public abstract class Account implements Observable{
 
     public Collection<AccountEntry> getEntryList() {
         return entryList;
+    }
+
+    public String getType() {
+        return type;
     }
 
 }

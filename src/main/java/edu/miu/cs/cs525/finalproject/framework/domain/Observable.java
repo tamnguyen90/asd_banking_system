@@ -5,5 +5,5 @@ public interface Observable {
 
     public void removeObserver(Observer o);
 
-    public void notifyObservers(double change);
+    public void notifyObservers(String message);
 }
