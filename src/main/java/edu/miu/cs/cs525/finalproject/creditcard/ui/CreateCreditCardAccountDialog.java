@@ -90,21 +90,23 @@ public class CreateCreditCardAccountDialog extends CreateAccountDialog {
         getContentPane().add(txtCardNbr);
         txtCardNbr.setBounds(120,192,156,20);
 
-        getContentPane().add(txtEmail);
-        txtEmail.setBounds(84,216,156,20);
-
         getContentPane().add(txtExpiredDate);
-        txtExpiredDate.setBounds(120,240,156,20);
+        txtExpiredDate.setBounds(120,216,156,20);
+
+        getContentPane().add(txtEmail);
+        txtEmail.setBounds(120,240,156,20);
+
+
 
         btnOk.setText("OK");
         btnOk.setActionCommand("OK");
         getContentPane().add(btnOk);
-        btnOk.setBounds(48,312,84,24);
+        btnOk.setBounds(48,276,84,24);
 
         btnCancel.setText("Cancel");
         btnCancel.setActionCommand("Cancel");
         getContentPane().add(btnCancel);
-        btnCancel.setBounds(156,312,84,24);
+        btnCancel.setBounds(156,276,84,24);
 
 
 

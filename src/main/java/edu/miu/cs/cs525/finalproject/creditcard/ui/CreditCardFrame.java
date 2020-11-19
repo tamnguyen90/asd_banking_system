@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CreditCardFrame extends MainFrame {
     private static  final String TITLE = "Credit-card processing Application";
-    private static final String[] TABLE_HEADERS = {"Name", "Credit Card #", "Exp date", "Type", "Balance"};
+    private static final String[] TABLE_HEADERS = {"Credit Card #", "Exp date", "Name", "City", "Type", "Balance"};
     protected JButton btnCreateAccount;
     protected JButton btnGenerateReport;
     protected JButton btnDeposit;
@@ -70,11 +70,21 @@ public class CreditCardFrame extends MainFrame {
                 if (isNewAccount()) {
                     Object[] data = new Object[8];
                     CreditCardAccount newAccount = (CreditCardAccount) dialog.getAccount();
-                    data[0] = newAccount.getCustomer().getName();
-                    data[1] = newAccount.getAccountNumber();
-                    data[2] = newAccount.getExpiredDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    data[3] = newAccount.getType();
-                    data[4] = newAccount.getBalance();
+                    String expiredDate = "";
+                    if (newAccount.getExpiredDate() != null) {
+                        try {
+                            expiredDate = newAccount.getExpiredDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        } catch (Exception exception) {
+
+                        }
+                    }
+
+                    data[0] = newAccount.getAccountNumber();
+                    data[1] = expiredDate;
+                    data[2] = newAccount.getCustomer().getName();
+                    data[3] = newAccount.getCustomer().getAddress().getCity();
+                    data[4] = newAccount.getType();
+                    data[5] = newAccount.getBalance();
                     getModel().addRow(data);
                     getJTable().getSelectionModel().setAnchorSelectionIndex(-1);
                     setNewAccount(false);
@@ -84,7 +94,7 @@ public class CreditCardFrame extends MainFrame {
         btnGenerateReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                mainFrame.getAccountService().generateReport();
             }
         });
         btnDeposit.addActionListener(new ActionListener() {

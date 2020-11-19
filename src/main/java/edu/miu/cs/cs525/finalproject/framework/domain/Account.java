@@ -1,22 +1,23 @@
 package edu.miu.cs.cs525.finalproject.framework.domain;
 
+import edu.miu.cs.cs525.finalproject.framework.service.InterestCalculation;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public abstract class Account implements Observable{
     private Customer customer;
-    private InterestCalculation interest;
+    protected InterestCalculation interest;
     private String accountNumber;
     private String type;
     private List<AccountEntry> entryList;
     private ArrayList<Observer> observers;
 
-    public Account(String accountNumber, String type, Customer customer, InterestCalculation interest) {
+    public Account(String accountNumber, String type, Customer customer) {
         this.accountNumber = accountNumber;
         this.type = type;
         this.customer = customer;
-        this.interest = interest;
         this.observers = new ArrayList<Observer>();
         this.entryList = new ArrayList<AccountEntry>();
         new Email(this);
@@ -58,7 +59,7 @@ public abstract class Account implements Observable{
     }
 
     public void addInterest() {
-        AccountEntry entry = new AccountEntry(interest.calculateInterest(), "interest");
+        AccountEntry entry = new AccountEntry(interest.calculateInterest(getBalance()), "interest");
         entryList.add(entry);
     }
 
@@ -83,6 +84,13 @@ public abstract class Account implements Observable{
         entryList.add(entry);
         String message = "Your account has just been " + transactionType + " $" + amount + ". The current balance is $" + getBalance() + ".";
         notifyObservers(message);
+    }
+
+    public void addInterest(double balance) {
+        AccountEntry entry = new AccountEntry(interest.calculateInterest(this.getBalance()), "interest adding");
+        entryList.add(entry);
+    }
+    public void addPayment() {
     }
 
     private void addEntry(AccountEntry entry) {

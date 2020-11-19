@@ -1,10 +1,10 @@
 package edu.miu.cs.cs525.finalproject.creditcard.service;
 
-import edu.miu.cs.cs525.finalproject.framework.domain.InterestCalculation;
+import edu.miu.cs.cs525.finalproject.framework.service.InterestCalculation;
 
 public class GoldCreditCardAccountInterest implements InterestCalculation {
     @Override
-    public double calculateInterest() {
-        return 0;
+    public double calculateInterest(double balance) {
+        return balance*0.6;
     }
 }

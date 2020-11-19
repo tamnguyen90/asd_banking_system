@@ -17,6 +17,7 @@ public abstract class CreateAccountDialog extends JDialog {
         getContentPane().setLayout(null);
         setSize(298,339);
         setVisible(false);
+        setResizable(false);
         
         init(labels);
 

@@ -23,6 +23,7 @@ public abstract class MainFrame extends JFrame {
         getContentPane().setLayout(new BorderLayout(0,0));
         setSize(575,310);
         setVisible(false);
+        setResizable(false);
 
         jPanel = new JPanel();
         jPanel.setLayout(null);

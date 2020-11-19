@@ -6,6 +6,7 @@ import edu.miu.cs.cs525.finalproject.framework.domain.Customer;
 
 public class PersonalCheckingsAccount extends Account {
     public PersonalCheckingsAccount(String accountNumber, String type, Customer customer) {
-        super(accountNumber, type, customer, new PersonalCheckingsInterest());
+        super(accountNumber, type, customer);
+        this.interest = new PersonalCheckingsInterest();
     }
 }

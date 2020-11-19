@@ -1,10 +1,14 @@
 package edu.miu.cs.cs525.finalproject.banking.service;
 
-import edu.miu.cs.cs525.finalproject.framework.domain.InterestCalculation;
+import edu.miu.cs.cs525.finalproject.framework.service.InterestCalculation;
 
 public class PersonalCheckingsInterest implements InterestCalculation {
     @Override
-    public double calculateInterest() {
-        return 0;
+    public double calculateInterest(double balance) {
+        if (balance < 1000) {
+            return balance * 0.15;
+        } else {
+            return balance * 0.25;
+        }
     }
 }

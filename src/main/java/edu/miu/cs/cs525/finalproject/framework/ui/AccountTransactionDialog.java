@@ -39,6 +39,7 @@ public class AccountTransactionDialog extends JDialog {
         getContentPane().setLayout(null);
         setSize(268,126);
         setVisible(false);
+        setResizable(false);
 
         JLabel lblAccount = new JLabel();
         lblAccount.setText("Account #");
@@ -102,9 +103,7 @@ public class AccountTransactionDialog extends JDialog {
         return accountNbr;
     }
 
-    private void executeCommand(Command command) {
-        if (command.execute()) {
-            //TODO refresh the UI
-        }
+    private boolean executeCommand(Command command) {
+        return command.execute();
     }
 }
