@@ -1,4 +1,4 @@
-package edu.miu.cs.cs525.finalproject.banking;
+package edu.miu.cs.cs525.finalproject.banking.service;
 
 import edu.miu.cs.cs525.finalproject.framework.service.AccountService;
 

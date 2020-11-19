@@ -1,6 +1,6 @@
 package edu.miu.cs.cs525.finalproject.framework.ui.bank;
 
-import edu.miu.cs.cs525.finalproject.banking.BankingSystemService;
+import edu.miu.cs.cs525.finalproject.banking.service.BankingSystemService;
 import edu.miu.cs.cs525.finalproject.framework.service.AccountService;
 
 import java.awt.*;
