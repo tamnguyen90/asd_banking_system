@@ -19,6 +19,7 @@ public abstract class Account implements Observable{
         this.interest = interest;
         this.observers = new ArrayList<Observer>();
         this.entryList = new ArrayList<AccountEntry>();
+        new Email(this);
     }
     
     // ==========================================================
