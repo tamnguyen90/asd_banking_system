@@ -130,8 +130,7 @@ public class CreditCardFrame extends MainFrame {
 
                     // compute new amount
                     double withdraw = dialog.getAmount();
-                    String currentAmountStr = (String)getModel().getValueAt(selection, 5);
-                    double currentAmount = Double.parseDouble(currentAmountStr);
+                    double currentAmount = (double)getModel().getValueAt(selection, 5);
                     double updatedAmount = currentAmount - withdraw;
                     getModel().setValueAt(updatedAmount, selection, 5);
                     if (updatedAmount < 0){
