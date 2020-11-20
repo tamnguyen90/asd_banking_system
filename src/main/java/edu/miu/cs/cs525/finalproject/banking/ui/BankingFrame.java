@@ -7,6 +7,7 @@ import edu.miu.cs.cs525.finalproject.framework.ui.AccountTransactionDialog;
 import edu.miu.cs.cs525.finalproject.framework.ui.CreateAccountDialog;
 import edu.miu.cs.cs525.finalproject.framework.ui.GenerateReportDialog;
 import edu.miu.cs.cs525.finalproject.framework.ui.MainFrame;
+import edu.miu.cs.cs525.finalproject.framework.ui.command.AddInterestCommand;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -102,7 +103,7 @@ public class BankingFrame extends MainFrame {
                     data[2] = newAccount.getCustomer().getAddress().getCity();
                     data[3] = "Personal";
                     data[4] = newAccount.getType();
-                    data[5] = "0.0";
+                    data[5] = Double.parseDouble("0.0");
                     getModel().addRow(data);
                     getJTable().getSelectionModel().setAnchorSelectionIndex(-1);
                     setNewAccount(false);
@@ -125,7 +126,7 @@ public class BankingFrame extends MainFrame {
                     data[2] = newAccount.getCustomer().getAddress().getCity();
                     data[3] = "Company";
                     data[4] = newAccount.getType();
-                    data[5] = "0.0";
+                    data[5] = Double.parseDouble("0.0");
                     getModel().addRow(data);
                     getJTable().getSelectionModel().setAnchorSelectionIndex(-1);
                     setNewAccount(false);
@@ -146,10 +147,9 @@ public class BankingFrame extends MainFrame {
 
                     // compute new amount
                     double deposit = dialog.getAmount();
-                    String currentAmountStr = (String)getModel().getValueAt(selection, 5);
-                    double currentAmount = Double.parseDouble(currentAmountStr);
+                    double currentAmount = (double) getModel().getValueAt(selection, 5);
                     double updatedAmount = currentAmount + deposit;
-                    getModel().setValueAt(String.valueOf(updatedAmount),selection, 5);
+                    getModel().setValueAt(updatedAmount, selection, 5);
                 }
             }
         });
@@ -167,10 +167,9 @@ public class BankingFrame extends MainFrame {
 
                     // compute new amount
                     double withdraw = dialog.getAmount();
-                    String currentAmountStr = (String)getModel().getValueAt(selection, 5);
-                    double currentAmount = Double.parseDouble(currentAmountStr);
+                    double currentAmount = (double) getModel().getValueAt(selection, 5);
                     double updatedAmount = currentAmount - withdraw;
-                    getModel().setValueAt(String.valueOf(updatedAmount ),selection, 5);
+                    getModel().setValueAt(updatedAmount, selection, 5);
                     if (updatedAmount < 0){
                         JOptionPane.showMessageDialog(btnWithdraw, " Account " + dialog.getAccountNbr() + " : balance is negative: $"+String.valueOf(updatedAmount )+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
                     }
@@ -182,7 +181,7 @@ public class BankingFrame extends MainFrame {
         btnAddInterest.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                accountService.addInterests();
+                executeCommand(new AddInterestCommand(accountService));
                 JOptionPane.showMessageDialog(btnAddInterest, "Add interest to all accounts successfully","Success", JOptionPane.INFORMATION_MESSAGE);
                 Collection<Account> accountList = accountService.getAllAccounts();
                 if (accountList != null && accountList.size() > 0) {

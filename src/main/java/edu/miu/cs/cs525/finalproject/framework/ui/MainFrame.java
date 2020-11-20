@@ -1,6 +1,7 @@
 package edu.miu.cs.cs525.finalproject.framework.ui;
 
 import edu.miu.cs.cs525.finalproject.framework.service.AccountService;
+import edu.miu.cs.cs525.finalproject.framework.ui.command.Command;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,9 @@ public abstract class MainFrame extends JFrame {
     public MainFrame(String title, String[] tableHeaders, AccountService accountService) {
 
         this.accountService = accountService;
+        this.jPanel = new JPanel();
+        this.model = new DefaultTableModel();
+        this.jScrollPane = new JScrollPane();
 
         setTitle(title);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -25,18 +29,16 @@ public abstract class MainFrame extends JFrame {
         setVisible(false);
         setResizable(false);
 
-        jPanel = new JPanel();
         jPanel.setLayout(null);
         getContentPane().add(BorderLayout.CENTER, jPanel);
         jPanel.setBounds(0,0,575,310);
 
-        model = new DefaultTableModel();
+        //Design the table header
         for (String col : tableHeaders) {
             model.addColumn(col);
         }
         jTable = new JTable(model);
 
-        jScrollPane = new JScrollPane();
         jPanel.add(jScrollPane);
         jScrollPane.setBounds(12,92,444,160);
         jScrollPane.getViewport().add(jTable);
@@ -74,6 +76,10 @@ public abstract class MainFrame extends JFrame {
 
     public AccountService getAccountService() {
         return accountService;
+    }
+
+    public boolean executeCommand(Command command) {
+        return command.execute();
     }
 
     public boolean isNewAccount() {

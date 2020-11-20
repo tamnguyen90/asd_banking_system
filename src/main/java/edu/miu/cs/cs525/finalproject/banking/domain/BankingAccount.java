@@ -28,9 +28,9 @@ public abstract class BankingAccount extends Account {
         Customer customer = getCustomer();
         report.append("Statement for Account: " + getAccountNumber() + "\n");
         report.append("Account Holder: " + customer.getName() + "\n");
-        report.append("-Date-------------------------"
-                + "-Description------------------"
-                + "-Amount-------------" + "\n");
+        report.append("--------------Date---------"
+                + "--Description-----"
+                + "--Amount-------------" + "\n");
         for (AccountEntry entry : getEntryList()) {
             String str = String.format("%30s%30s%20.2f\n",
                     entry.getDate().toString(),
@@ -38,7 +38,7 @@ public abstract class BankingAccount extends Account {
                     entry.getAmount());
             report.append(str + "\n");
         }
-        report.append("----------------------------------------" + "----------------------------------------" + "\n");
+        report.append("----------------------------------------" + "---------------------------" + "\n");
         String str = String.format("%30s%30s%20.2f\n\n", "", " Balance + interest:", getBalance());
         report.append(str + "\n");
         return report.toString();

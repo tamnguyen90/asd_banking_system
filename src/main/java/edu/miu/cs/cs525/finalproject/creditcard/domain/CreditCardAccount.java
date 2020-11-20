@@ -115,7 +115,7 @@ public abstract class CreditCardAccount extends Account {
         report.append( "Total charge: $ " + totalCharges + '\n');
         report.append( "Total credit: $ " + totalCredits + '\n');
         report.append( "New Balance: $ " + newBalance + '\n');
-        report.append( "Total Amount Due: $ " + totalDue + '\n');
+        report.append( "Total Amount Due: $ " + (totalDue < 0 ? 0.0 : totalDue) + '\n');
         report.append( "\r");
         return report.toString();
     }
