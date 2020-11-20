@@ -1,9 +1,9 @@
 package edu.miu.cs.cs525.finalproject.framework.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class AccountEntry {
-    private Date date;
+    private LocalDate date;
     private double amount;
     private String description;
 
@@ -12,7 +12,7 @@ public class AccountEntry {
 
     public AccountEntry(double amount, String description) {
         super();
-        this.date = new Date();
+        this.date = LocalDate.now();
         this.amount = amount;
         this.description = description;
     }
@@ -21,24 +21,13 @@ public class AccountEntry {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
 }

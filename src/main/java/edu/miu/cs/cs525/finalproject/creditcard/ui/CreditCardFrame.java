@@ -3,6 +3,7 @@ package edu.miu.cs.cs525.finalproject.creditcard.ui;
 import edu.miu.cs.cs525.finalproject.creditcard.service.CreditCardSystemService;
 import edu.miu.cs.cs525.finalproject.creditcard.domain.CreditCardAccount;
 import edu.miu.cs.cs525.finalproject.framework.ui.AccountTransactionDialog;
+import edu.miu.cs.cs525.finalproject.framework.ui.GenerateReportDialog;
 import edu.miu.cs.cs525.finalproject.framework.ui.MainFrame;
 
 import javax.swing.*;
@@ -54,7 +55,6 @@ public class CreditCardFrame extends MainFrame {
         jPanel.add(btnExit);
         btnExit.setBounds(468,248,96,31);
 
-
         btnExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,7 +84,7 @@ public class CreditCardFrame extends MainFrame {
                     data[2] = newAccount.getCustomer().getName();
                     data[3] = newAccount.getCustomer().getAddress().getCity();
                     data[4] = newAccount.getType();
-                    data[5] = newAccount.getBalance();
+                    data[5] = "0.0";
                     getModel().addRow(data);
                     getJTable().getSelectionModel().setAnchorSelectionIndex(-1);
                     setNewAccount(false);
@@ -94,7 +94,10 @@ public class CreditCardFrame extends MainFrame {
         btnGenerateReport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.getAccountService().generateReport();
+                String report = mainFrame.getAccountService().generateReport();
+                GenerateReportDialog dialog = new GenerateReportDialog(mainFrame, "Credit card billing report", report);
+                dialog.setBounds(450, 20, 700, 350);
+                dialog.setVisible(true);
             }
         });
         btnDeposit.addActionListener(new ActionListener() {

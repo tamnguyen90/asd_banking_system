@@ -5,6 +5,7 @@ import edu.miu.cs.cs525.finalproject.framework.domain.Account;
 import edu.miu.cs.cs525.finalproject.framework.domain.Person;
 import edu.miu.cs.cs525.finalproject.framework.ui.AccountTransactionDialog;
 import edu.miu.cs.cs525.finalproject.framework.ui.CreateAccountDialog;
+import edu.miu.cs.cs525.finalproject.framework.ui.GenerateReportDialog;
 import edu.miu.cs.cs525.finalproject.framework.ui.MainFrame;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class BankingFrame extends MainFrame {
     private JButton btnCreateCompanyAcct;
     private JButton btnDeposit;
     private JButton btnWithdraw;
+    private JButton btnReport;
     private JButton btnAddInterest;
     private JButton btnExit;
     private MainFrame mainFrame;
@@ -37,6 +39,7 @@ public class BankingFrame extends MainFrame {
         this.btnWithdraw = new JButton();
         this.btnAddInterest = new JButton();
         this.btnExit = new JButton();
+        this.btnReport = new JButton();
 
         btnCreatePersonalAcct.setText("Add personal account");
         btnCreatePersonalAcct.setActionCommand("jbutton");
@@ -57,7 +60,11 @@ public class BankingFrame extends MainFrame {
 
         btnWithdraw.setText("Withdraw");
         jPanel.add(btnWithdraw);
-        btnWithdraw.setBounds(468,164,96,33);
+        btnWithdraw.setBounds(468,148,96,33);
+
+        btnReport.setText("Report");
+        jPanel.add(btnReport);
+        btnReport.setBounds(468,200,96,33);
 
 
         btnAddInterest.setText("Add interest");
@@ -195,6 +202,16 @@ public class BankingFrame extends MainFrame {
                     }
                 }
 
+            }
+        });
+
+        btnReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String report = mainFrame.getAccountService().generateReport();
+                GenerateReportDialog dialog = new GenerateReportDialog(mainFrame, "Banking account report", report);
+                dialog.setBounds(450, 20, 700, 350);
+                dialog.setVisible(true);
             }
         });
     }

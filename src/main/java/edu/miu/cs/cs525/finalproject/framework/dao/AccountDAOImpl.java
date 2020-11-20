@@ -21,13 +21,13 @@ public class AccountDAOImpl implements AccountDAO {
         }
     }
 
-    public void updateAccount(String customerName, Account account) {
+    public void updateAccount(String customerName, Account updatedAccount) {
         Customer customer = getCustomerByName(customerName);
         Collection<Account> accounts = accountMap.get(customer);
-        Account currentAccount = loadAccount(account.getAccountNumber());
+        Account currentAccount = loadAccount(updatedAccount.getAccountNumber());
         if (currentAccount != null) {
-            accounts.remove(currentAccount); // remove the old
-            accounts.add(account); // add the new
+            accounts.remove(currentAccount);
+            accounts.add(updatedAccount);
         }
 
     }

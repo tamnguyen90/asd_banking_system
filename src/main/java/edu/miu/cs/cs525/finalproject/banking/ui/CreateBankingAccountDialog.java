@@ -107,30 +107,9 @@ public abstract class CreateBankingAccountDialog extends CreateAccountDialog {
             }
         });
 
-        btnOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Customer customer = getCustomer();
-                Account account = getAccount();
-                boolean isCreated = false;
-                if (account != null) {
-                    isCreated = executeCommand(new CreateAccountCommand(customer, account, mainFrame.getAccountService()));
-                }
-
-                if (isCreated) {
-                    mainFrame.setNewAccount(true);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(btnOk, "The account is existing in the system or invalid.","Fail",JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        });
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        //Button listener
+        btnOk.addActionListener(new CreateAccountAction());
+        btnCancel.addActionListener(new CancelAction());
     }
 
     protected abstract void populateAdditionalFields();

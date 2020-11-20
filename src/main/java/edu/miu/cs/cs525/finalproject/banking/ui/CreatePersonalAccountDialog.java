@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CreatePersonalAccountDialog extends CreateBankingAccountDialog {
     private static final String TITLE = "Add Personal Account";
-    private static final String[] FIELDS = {"Account #", "Name", "Street", "City", "State", "Zip", "Email", "Birthday"};
+    private static final String[] FIELDS = {"Account #", "Name", "Street", "City", "State", "Zip", "Email", "Birthdate"};
 
     private JTextField txtBirthdate;
     public CreatePersonalAccountDialog(MainFrame mainFrame) {

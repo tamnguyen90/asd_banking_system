@@ -1,6 +1,7 @@
 package edu.miu.cs.cs525.finalproject.framework.domain;
 
 import edu.miu.cs.cs525.finalproject.framework.service.InterestCalculation;
+import edu.miu.cs.cs525.finalproject.framework.service.EmailSender;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,7 +21,7 @@ public abstract class Account implements Observable{
         this.customer = customer;
         this.observers = new ArrayList<Observer>();
         this.entryList = new ArrayList<AccountEntry>();
-        new Email(this);
+        new EmailSender(this);
     }
     
     // ==========================================================
@@ -74,23 +75,13 @@ public abstract class Account implements Observable{
     public void deposit(double amount) {
         AccountEntry entry = new AccountEntry(amount, "deposit");
         entryList.add(entry);
-        String message = "Your account has just been deposited $" + amount + ". The current balance is $" + getBalance() + ".";
-        notifyObservers(message);
+        depositNotification(amount);
     }
 
     public void withdraw(double amount) {
-        String transactionType = "credit".equals(type) ? "charged" : "withdrawn";
-        AccountEntry entry = new AccountEntry(-amount, transactionType);
+        AccountEntry entry = new AccountEntry(-amount, "withdraw");
         entryList.add(entry);
-        String message = "Your account has just been " + transactionType + " $" + amount + ". The current balance is $" + getBalance() + ".";
-        notifyObservers(message);
-    }
-
-    public void addInterest(double balance) {
-        AccountEntry entry = new AccountEntry(interest.calculateInterest(this.getBalance()), "interest adding");
-        entryList.add(entry);
-    }
-    public void addPayment() {
+        withdrawNotification(amount);
     }
 
     private void addEntry(AccountEntry entry) {
@@ -112,5 +103,9 @@ public abstract class Account implements Observable{
     public String getType() {
         return type;
     }
+
+    protected abstract void depositNotification(double amount);
+    protected abstract void withdrawNotification(double amount);
+    public abstract String generateReport();
 
 }

@@ -1,7 +1,7 @@
 package edu.miu.cs.cs525.finalproject.creditcard.domain;
 
-import edu.miu.cs.cs525.finalproject.creditcard.service.GoldCreditCardAccountInterest;
-import edu.miu.cs.cs525.finalproject.creditcard.service.GoldCreditMinimumPayment;
+import edu.miu.cs.cs525.finalproject.creditcard.service.interest.GoldCreditCardAccountInterest;
+import edu.miu.cs.cs525.finalproject.creditcard.service.minimumpayment.GoldCreditMinimumPayment;
 import edu.miu.cs.cs525.finalproject.framework.domain.Customer;
 
 import java.time.LocalDate;

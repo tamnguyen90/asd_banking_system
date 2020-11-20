@@ -2,9 +2,12 @@ package edu.miu.cs.cs525.finalproject.framework.ui;
 
 import edu.miu.cs.cs525.finalproject.framework.domain.Account;
 import edu.miu.cs.cs525.finalproject.framework.ui.command.Command;
+import edu.miu.cs.cs525.finalproject.framework.ui.command.CreateAccountCommand;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public abstract class CreateAccountDialog extends JDialog {
     protected MainFrame mainFrame;
@@ -46,4 +49,31 @@ public abstract class CreateAccountDialog extends JDialog {
     public abstract Account getAccount();
 
     protected abstract void populateInputFields();
+
+    public class CreateAccountAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Account account = getAccount();
+            boolean isCreated = false;
+            if (account != null) {
+                isCreated = executeCommand(new CreateAccountCommand(account.getCustomer(), account, mainFrame.getAccountService()));
+            }
+
+            if (isCreated) {
+                mainFrame.setNewAccount(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog((Component) e.getSource(), "The account is existing in the system or invalid.","Fail",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+    }
+
+    public class CancelAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();
+        }
+    }
 }

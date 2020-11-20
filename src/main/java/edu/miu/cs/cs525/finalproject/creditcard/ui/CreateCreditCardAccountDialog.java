@@ -60,17 +60,17 @@ public class CreateCreditCardAccountDialog extends CreateAccountDialog {
         radioGold.setText("Gold");
         radioGold.setActionCommand("Checkings");
         getContentPane().add(radioGold);
-        radioGold.setBounds(36,12,84,24);
+        radioGold.setBounds(36,10,84,24);
 
         radioSilver.setText("Silver");
         radioSilver.setActionCommand("Savings");
         getContentPane().add(radioSilver);
-        radioSilver.setBounds(36,36,84,24);
+        radioSilver.setBounds(36,30,84,24);
 
         radioBronze.setText("Bronze");
         radioBronze.setActionCommand("Savings");
         getContentPane().add(radioBronze);
-        radioBronze.setBounds(36,60,84,24);
+        radioBronze.setBounds(36,50,84,24);
 
         getContentPane().add(txtName);
         txtName.setBounds(120,72,156,20);
@@ -137,30 +137,9 @@ public class CreateCreditCardAccountDialog extends CreateAccountDialog {
             }
         });
 
-        btnOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Account account = getAccount();
-                boolean isCreated = false;
-                if (account != null) {
-                    isCreated = executeCommand(new CreateAccountCommand(account.getCustomer(), account, mainFrame.getAccountService()));
-                }
-
-                if (isCreated) {
-                    mainFrame.setNewAccount(true);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(btnOk, "The account is existing in the system or invalid.","Fail",JOptionPane.WARNING_MESSAGE);
-                }
-            }
-        });
-
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        //Button listener
+        btnOk.addActionListener(new CreateAccountAction());
+        btnCancel.addActionListener(new CancelAction());
 
     }
 

@@ -1,4 +1,7 @@
-package edu.miu.cs.cs525.finalproject.framework.domain;
+package edu.miu.cs.cs525.finalproject.framework.service;
+
+import edu.miu.cs.cs525.finalproject.framework.domain.Account;
+import edu.miu.cs.cs525.finalproject.framework.domain.Observer;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -8,10 +11,10 @@ import javax.mail.internet.MimeMultipart;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class Email implements Observer {
+public class EmailSender implements Observer {
     private Account subject;
 
-    public Email(Account account) {
+    public EmailSender(Account account) {
         this.subject = account;
         account.registerObserver(this);
     }
