@@ -113,7 +113,7 @@ public class CreditCardFrame extends MainFrame {
                     // compute new amount
                     double deposit = dialog.getAmount();
                     double currentAmount = (double) getModel().getValueAt(selection, 5);
-                    double updatedAmount = currentAmount - deposit;
+                    double updatedAmount = currentAmount + deposit;
                     getModel().setValueAt(updatedAmount, selection, 5);
                 }
             }
